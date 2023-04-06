@@ -1,6 +1,7 @@
 <template>
   <div class="container">	  
    <button class="buy-btn" @click="showModal = true">购买须知</button>
+    <p class="modal-title">提供全程打小人视频反馈</p>
     <form class="form" @submit.prevent="submitForm">
       <div class="form-group">
         <label for="email">邮箱</label>
@@ -51,28 +52,15 @@
 	      <li>打小人服务是一种传统风水习俗，仅供娱乐和个人信仰之用。</li>
 	      <li>我们的打小人服务不保证一定会产生预期的效果，也不承担任何因使用该服务而产生的任何法律责任。</li>
 	      <li>购买本服务需遵守当地法律法规，未成年人需在法定监护人的陪同下使用本服务。</li>
-	      <li>购买成功后，我们将在2个工作日内为您提供服务。如果您需要取消服务，请在购买后的24小时内联系我们。</li>
+	      <li>购买成功后，我们将在2个工作日内为您提供服务。服务完成我们将上传图片和现场视频供您查阅。</li>
 	      <li>购买成功后，您的注册码将会发送到您填写的邮箱中。请务必保留好该注册码，以便日后查询预定进度。</li>
 	      <li>如有任何疑问或需要帮助，请添加我们的微信客服进行咨询。</li>
 	    </ol>
 	    <button class="modal-close" @click="closeModal">×</button>
 		<button class="close-btn" @click="closeModal">我知道了</button>
-	  </div>
-	    <div class="success-modal" v-if="showSuccessModal">
-	         <h2>预约成功</h2>
-	         <ul>
-	           <li>邮箱：{{email}}</li>
-	           <li>姓名：{{name}}</li>
-	           <li>日期类型：{{lunarSolar}}</li>
-	           <li>出生日期：{{birthday}}</li>
-	           <li>小人姓名：{{childName}}</li>
-	           <li>预约日期：{{formattedAppointmentDate}}</li>
-	           <li>注册码：{{registrationCode}}</li>
-	         </ul>
-	         <button @click="showSuccessModal = false">确定</button>
-	       </div>
+		</div>
 	     </div>
-		 </div>
+	</div>
 </template>
 
 <script>
@@ -89,8 +77,7 @@ export default {
       isLunarCalendar: false,
       maxDate: new Date().toISOString().split('T')[0],
       minDate: new Date('1950-01-01').toISOString().split('T')[0],
-      showModal: true ,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
-	  showSuccessModal: false,
+      showModal: true,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
     };
   },
   methods: {
@@ -119,8 +106,6 @@ export default {
           console.log(data);
           if (data.status === 'success') {
             this.feedback = '提交成功';
-			 this.showSuccessModal = true; // 设置showSuccessModal为true，显示弹窗
-			 console.log(this.showSuccessModal);
           } else {
             this.feedback = '提交失败，请重试';
           }
@@ -431,25 +416,6 @@ button[type="submit"] {
   .modal-content {
     max-width: 80%;
   }
-}
-
-.success-modal {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
-  color: #4bbd6e;
-  display: flex;
-  font-size: 16px;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  z-index: 999;
 }
 
 </style>
