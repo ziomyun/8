@@ -58,7 +58,7 @@
 	    <button class="modal-close" @click="closeModal">×</button>
 		<button class="close-btn" @click="closeModal">我知道了</button>
 	  </div>
-	    <div class="success-modal" v-show="showSuccessModal">
+	    <div class="success-modal" v-if="showSuccessModal">
 	         <h2>预约成功</h2>
 	         <ul>
 	           <li>邮箱：{{email}}</li>
