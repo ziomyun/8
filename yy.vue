@@ -58,8 +58,21 @@
 	    <button class="modal-close" @click="closeModal">×</button>
 		<button class="close-btn" @click="closeModal">我知道了</button>
 	  </div>
-	</div>
-  </div>
+	    <div class="success-modal" v-show="showSuccessModal">
+	         <h2>预约成功</h2>
+	         <ul>
+	           <li>邮箱：{{email}}</li>
+	           <li>姓名：{{name}}</li>
+	           <li>日期类型：{{lunarSolar}}</li>
+	           <li>出生日期：{{birthday}}</li>
+	           <li>小人姓名：{{childName}}</li>
+	           <li>预约日期：{{formattedAppointmentDate}}</li>
+	           <li>注册码：{{registrationCode}}</li>
+	         </ul>
+	         <button @click="showSuccessModal = false">确定</button>
+	       </div>
+	     </div>
+		 </div>
 </template>
 
 <script>
@@ -77,6 +90,7 @@ export default {
       maxDate: new Date().toISOString().split('T')[0],
       minDate: new Date('1950-01-01').toISOString().split('T')[0],
       showModal: true ,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
+	  showSuccessModal: false,
     };
   },
   methods: {
@@ -105,6 +119,7 @@ export default {
           console.log(data);
           if (data.status === 'success') {
             this.feedback = '提交成功';
+			 this.showSuccessModal = true; // 设置showSuccessModal为true，显示弹窗
           } else {
             this.feedback = '提交失败，请重试';
           }
