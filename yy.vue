@@ -120,6 +120,7 @@ export default {
           if (data.status === 'success') {
             this.feedback = '提交成功';
 			 this.showSuccessModal = true; // 设置showSuccessModal为true，显示弹窗
+			 console.log(this.showSuccessModal);
           } else {
             this.feedback = '提交失败，请重试';
           }
@@ -431,4 +432,24 @@ button[type="submit"] {
     max-width: 80%;
   }
 }
+
+.success-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  color: #4bbd6e;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  z-index: 999;
+}
+
 </style>
