@@ -5,7 +5,7 @@
     <form class="form" @submit.prevent="submitForm">
       <div class="form-group">
         <label for="email">邮箱</label>
-        <input id="email" type="email" v-model.trim="email" required>
+        <input id="email" type="email" name="email" v-model.trim="email" required autocomplete="email">
       </div>
       <div class="form-group">
         <label for="name">姓名</label>
@@ -61,6 +61,22 @@
 		</div>
 	     </div>
 	</div>
+	<div class="success-modal modal" v-if="showSuccessModal">
+	  <div class="modal-content">
+	    <h2 class="modal-title">预约成功</h2>
+	    <ul>
+	      <li>邮箱：{{email}}</li>
+	      <li>姓名：{{name}}</li>
+	      <li>日期类型：{{lunarSolar}}</li>
+	      <li>出生日期：{{birthday}}</li>
+	      <li>小人姓名：{{childName}}</li>
+	      <li>预约日期：{{formattedAppointmentDate}}</li>
+	      <li>注册码：{{registrationCode}}</li>
+		  <li>如果您是游客请牢记注册方便查询进度</li>
+	    </ul>
+	    <button class="close-btn" @click="showSuccessModal = false">确定</button>
+	  </div>
+	</div>
 </template>
 
 <script>
@@ -68,16 +84,19 @@ export default {
   data() {
     return {
       email: '',
-      name: '',
-      calendar: '',
-      childName: '',
-      appointmentDate: '',
-      registrationCode: '',
-      feedback: '',
-      isLunarCalendar: false,
-      maxDate: new Date().toISOString().split('T')[0],
-      minDate: new Date('1950-01-01').toISOString().split('T')[0],
-      showModal: true,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
+            name: '',
+            calendar: '',
+            childName: '',
+            appointmentDate: '',
+            registrationCode: '',
+            feedback: '',
+            isLunarCalendar: false,
+            maxDate: new Date().toISOString().split('T')[0],
+            minDate: new Date('1950-01-01').toISOString().split('T')[0],
+            showModal: true,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
+      	    showSuccessModal: false,
+            lunarSolar: '', // 定义 lunarSolar 属性，用于存储用户选择的日期
+            birthday: '', // 定义 birthday 属性，用于存储用户的生日日期
     };
   },
   methods: {
@@ -106,6 +125,7 @@ export default {
           console.log(data);
           if (data.status === 'success') {
             this.feedback = '提交成功';
+            this.showSuccessModal = true; // 设置弹窗显示
           } else {
             this.feedback = '提交失败，请重试';
           }
@@ -414,6 +434,80 @@ button[type="submit"] {
 
 @media screen and (max-width: 480px) {
   .modal-content {
+    max-width: 80%;
+  }
+}
+
+.success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-modal-content ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+}
+
+.success-modal-content li {
+  margin-bottom: 10px;
+}
+
+.success-modal-content p {
+  margin-bottom: 10px;
+}
+
+.success-modal-title {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.success-modal-button {
+  margin-top: 20px;
+  background-color: #007aff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+  .success-modal-content {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .success-modal-content {
     max-width: 80%;
   }
 }
