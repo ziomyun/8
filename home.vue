@@ -7,10 +7,6 @@
         <button class="header-button">登录</button>
 		 <div class="time-info">
 		        <div class="time-info-item">
-		          <span class="label">总计提供打小人服务次数：</span>
-		          <span class="value">{{ serviceCount }}次</span>
-		        </div>
-		        <div class="time-info-item">
 		          <span class="label">当前时间：</span>
 		          <span class="value">{{ currentTime }}</span>
 		        </div>
@@ -49,6 +45,19 @@
 	  </div>
     </div>
   </div>
+ <div class="tc-modal" v-show="showModal">
+   <div class="tc-modal-content">
+     <h2 class="tc-modal-title">爻爻秘籍</h2>
+     <p>香港专业风水服务团队为您服务！</p>
+     <p>什么情况需要打小人?</p>
+       <li>身边有小三破坏感情。</li>
+       <li>生活和工作中遭到背后算计！</li>
+       <li>家庭生活不顺，如家庭成员间的矛盾、争吵、不和谐</li>
+       <li>感受到运势低迷，希望通过驱邪化解晦气，提升运势。</li>
+     <button class="modal-close" @click="closeModal">×</button>
+     <button class="tc-close-btn" @click="closeModal">我知道了</button>
+   </div>
+ </div>
 </template>
 <script>
 import BottomNavigation from '@/components/BottomNavigation.vue';
@@ -61,9 +70,9 @@ export default {
     return {
       showContact: false,
       currentTime: '', // 存储当前时间的变量
-      serviceCount: 985, // 存储小人服务次数的变量
 	  showPopup: false, // 控制弹窗的显示
 	  submitContent: '', // 存储提交的内容
+	  showModal: true,// 添加 showModal 数据属性，用于控制弹窗的显示与隐藏，默认为 true
     };
   },
   mounted() {
@@ -71,11 +80,6 @@ export default {
       const now = new Date();
       this.currentTime = now.toLocaleString();
     }, 1000);
-    
-    setInterval(() => {
-      const countIncrease = Math.floor(Math.random() * 21) + 10;
-      this.serviceCount += countIncrease;
-    }, 86400000); // 每24小时增加一次
   },
   methods: {
     toAppointment() {
@@ -95,6 +99,9 @@ export default {
     closeContact() {
       this.showContact = false;
     },
+	closeModal() {
+	  this.showModal = false; // 点击关闭按钮时设置showModal为false，隐藏弹窗
+	},
     copyWechat() {
       const wechat = 'HK_Culture';
       const input = document.createElement('input');
@@ -189,7 +196,7 @@ body {
 }
 
 .button {
-  background-color: rgba(16, 16, 16, 0.8);
+  background-color: rgb(14 104 86 / 80%);
   color: #fff;
   padding: 12px 24px;
   border-radius: 5px;
@@ -303,10 +310,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(16, 16, 16, 0.8);
+  background-color: rgb(14 104 86 / 80%);
   padding: 10px;
   position: absolute;
-  top: 30%;
+  top: 37%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
@@ -335,22 +342,93 @@ body {
 .watch-video {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 80px;
 }
 
 .watch-video a {
   font-size: 24px;
-  color: #f00;
+  color: #fff;
   text-decoration: none;
   border: 2px solid #000;
   padding: 10px 20px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  background-color: rgb(14 104 86 / 80%);
 }
 
 .watch-video a:hover {
   background-color: #000;
   color: #fff;
+}
+
+.tc-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tc-modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.tc-close-btn {
+  margin-top: 20px;
+  /* 其他样式 */
+}
+
+.tc-modal-content li {
+  margin-bottom: 10px;
+}
+
+.tc-modal-content p {
+  margin-bottom: 10px;
+}
+
+.tc-modal-title {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 640px) {
+  .tc-modal-content {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tc-modal-content {
+    max-width: 80%;
+  }
+}
+
+/* 关闭按钮 */
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
 }
 
 </style>
