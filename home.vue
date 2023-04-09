@@ -58,6 +58,48 @@
      <button class="tc-close-btn" @click="closeModal">我知道了</button>
    </div>
  </div>
+<div class="why-play">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="section-title">为什么需要打小人？</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="why-play-item">
+            <div class="why-play-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="why-play-title">减压、放松心情</h3>
+            <p class="why-play-desc">打小人可以让人将心中的不满、不爽等情绪化为力量，缓解生活中的压力和疲劳。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="why-play-item">
+            <div class="why-play-icon"><i class="fas fa-user-secret"></i></div>
+            <h3 class="why-play-title">释放情感</h3>
+            <p class="why-play-desc">打小人可以让人发泄内心的情感，让人的心情得到了很好的舒缓和释放。</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="why-play-item">
+            <div class="why-play-icon"><i class="fas fa-hand-rock"></i></div>
+            <h3 class="why-play-title">培养毅力和耐力</h3>
+            <p class="why-play-desc">打小人需要坚持不懈的努力，可以帮助人们培养毅力和耐力，更好地面对生活中的挑战。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="why-play-item">
+            <div class="why-play-icon"><i class="fas fa-flag-checkered"></i></div>
+            <h3 class="why-play-title">提高专注力和反应能力</h3>
+            <p class="why-play-desc">打小人需要高度的专注力和快速的反应能力，可以帮助人们提高这些方面的能力。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
 </template>
 <script>
 import BottomNavigation from '@/components/BottomNavigation.vue';
@@ -431,4 +473,78 @@ body {
   cursor: pointer;
 }
 
+ .why-play {
+    background-color: #fff;
+    padding: 80px 0;
+  }
+
+  .why-play .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .why-play-item {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .why-play-icon {
+    font-size: 50px;
+    color: #2e3192;
+    margin-bottom: 30px;
+  }
+
+  .why-play-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .why-play-desc {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  margin-top: 20px;
+  }
+  
+  .section {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .section-text {
+    width: 600px;
+    margin-right: 50px;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  
+  .section-text h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .section-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 60px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #00bcd4;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .section-btn:hover {
+    transform: scale(1.1);
+    background-color: #0097a7;
+  }
+
+	
 </style>
